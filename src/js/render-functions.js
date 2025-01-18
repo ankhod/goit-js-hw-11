@@ -1,33 +1,31 @@
+// render-functions.js
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 
-export function renderImages(images) {
-  const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = images
-    .map(
-      image => `
-    <a href="${image.largeImageURL}">
-      <img src="${image.webformatURL}" alt="${image.tags}" />
-      <div>
-        <p>Likes: ${image.likes}</p>
-        <p>Views: ${image.views}</p>
-        <p>Comments: ${image.comments}</p>
-        <p>Downloads: ${image.downloads}</p>
+export function createImageCard({
+  webformatURL,
+  largeImageURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads,
+}) {
+  return `
+    <a href="${largeImageURL}" class="gallery-item">
+      <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+      <div class="info">
+        <p class="info-item"><b>Likes</b>${likes}</p>
+        <p class="info-item"><b>Views</b>${views}</p>
+        <p class="info-item"><b>Comments</b>${comments}</p>
+        <p class="info-item"><b>Downloads</b>${downloads}</p>
       </div>
     </a>
-  `
-    )
-    .join('');
-
-  const lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
+  `;
 }
 
-export function showError(message) {
-  iziToast.error({
-    title: 'Error',
-    message: message,
-  });
+export function renderGallery(images) {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = images.map(createImageCard).join('');
+  new SimpleLightbox('.gallery a');
 }

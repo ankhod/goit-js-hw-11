@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Search</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/izitoast/dist/css/iziToast.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/simplelightbox/dist/simple-lightbox.min.css"
+    />
   </head>
   <body>
-    <form class="search-form">
-      <input
-        type="text"
-        name="searchQuery"
-        placeholder="Search images..."
-        required
-      />
-      <button type="submit">Search</button>
-    </form>
-    <div class="gallery"></div>
-    <script type="module" src="./main.js"></script>
+    <div class="container">
+      <form id="search-form">
+        <input type="text" name="searchQuery" placeholder="Search images..." />
+        <button type="submit">Search</button>
+      </form>
+      <div class="gallery"></div>
+      <div class="loader hidden"></div>
+    </div>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
