@@ -99,10 +99,11 @@ button:hover {
   width: 40px;
   height: 40px;
   animation: spin 2s linear infinite;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 
 @keyframes spin {
@@ -112,4 +113,8 @@ button:hover {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.hidden {
+  display: none;
 }

@@ -23,18 +23,22 @@ form.addEventListener('submit', async event => {
     loader.classList.remove('hidden');
     gallery.innerHTML = ''; // Очищуємо попередні результати пошуку
     const data = await fetchImages(query);
-    loader.classList.add('hidden');
 
-    if (data.hits.length === 0) {
-      iziToast.error({
-        title: 'Error',
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
-      });
-      return;
-    }
+    setTimeout(() => {
+      // Додаємо невелику затримку перед приховуванням індикатора
+      loader.classList.add('hidden');
 
-    renderGallery(data.hits);
+      if (data.hits.length === 0) {
+        iziToast.error({
+          title: 'Error',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+        });
+        return;
+      }
+
+      renderGallery(data.hits);
+    }, 1000); // Затримка у 500 мілісекунд
   } catch (error) {
     iziToast.error({ title: 'Error', message: error.message });
     loader.classList.add('hidden');

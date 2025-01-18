@@ -12,7 +12,7 @@ export function createImageCard({
   downloads,
 }) {
   return `
-    <a href="${largeImageURL}" class="gallery-item">
+    <a href="${largeImageURL}" class="gallery-item" title="${tags}">
       <img src="${webformatURL}" alt="${tags}" loading="lazy" />
       <div class="info">
         <p class="info-item"><b>Likes</b>${likes}</p>
@@ -27,5 +27,10 @@ export function createImageCard({
 export function renderGallery(images) {
   const gallery = document.querySelector('.gallery');
   gallery.innerHTML = images.map(createImageCard).join('');
-  new SimpleLightbox('.gallery a');
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captions: true, // Увімкнення підписів
+    captionsData: 'title', // Використання атрибута title як джерело для підписів
+    captionDelay: 250, // Затримка перед відображенням підпису
+  });
+  lightbox.refresh(); // Оновлення бібліотеки після додавання нових елементів
 }
