@@ -25,7 +25,6 @@ form.addEventListener('submit', async event => {
     const data = await fetchImages(query);
 
     setTimeout(() => {
-      // Додаємо невелику затримку перед приховуванням індикатора
       loader.classList.add('hidden');
 
       if (data.hits.length === 0) {
@@ -38,7 +37,15 @@ form.addEventListener('submit', async event => {
       }
 
       renderGallery(data.hits);
-    }, 1000); // Затримка у 500 мілісекунд
+
+      // Ініціалізація SimpleLightbox після завантаження зображень
+      const lightbox = new SimpleLightbox('.gallery a', {
+        captions: true,
+        captionsData: 'title',
+        captionDelay: 250,
+      });
+      lightbox.refresh();
+    }, 1000); // Затримка у 1000 мілісекунд
   } catch (error) {
     iziToast.error({ title: 'Error', message: error.message });
     loader.classList.add('hidden');
