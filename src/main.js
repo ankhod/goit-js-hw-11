@@ -1,6 +1,5 @@
-// main.js
 import { fetchImages } from './js/pixabay-api.js';
-import { renderGallery } from './js/render-functions.js';
+import { renderGallery, initLightbox } from './js/render-functions.js'; // Додано initLightbox
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import './css/styles.css';
@@ -37,14 +36,7 @@ form.addEventListener('submit', async event => {
       }
 
       renderGallery(data.hits);
-
-      // Ініціалізація SimpleLightbox після завантаження зображень
-      const lightbox = new SimpleLightbox('.gallery a', {
-        captions: true,
-        captionsData: 'title',
-        captionDelay: 250,
-      });
-      lightbox.refresh();
+      initLightbox(); // Ініціалізація SimpleLightbox
     }, 1000); // Затримка у 1000 мілісекунд
   } catch (error) {
     iziToast.error({ title: 'Error', message: error.message });
