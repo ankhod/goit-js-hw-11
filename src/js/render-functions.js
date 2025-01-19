@@ -32,7 +32,7 @@ export function renderGallery(images) {
 export function initLightbox() {
   const lightbox = new SimpleLightbox('.gallery a', {
     captions: true,
-    captionsData: 'title',
+    captionsData: 'alt',
     captionDelay: 250,
   });
   lightbox.refresh();
